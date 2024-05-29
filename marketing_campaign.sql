@@ -29,13 +29,38 @@ GROUP BY Education;
 
 --- Campaign acceptance rates
 SELECT 
-    100*(AVG(AcceptedCmp1)) AS acceptance_rate_cmp1,
-    100*(AVG(AcceptedCmp2)) AS acceptance_rate_cmp2,
-    100*(AVG(AcceptedCmp3)) AS acceptance_rate_cmp3,
-    100*(AVG(AcceptedCmp4)) AS acceptance_rate_cmp4,
-    100*(AVG(AcceptedCmp5)) AS acceptance_rate_cmp5,
-    100*(AVG(Response)) AS overall_acceptance_rate
+    ROUND(100*(AVG(AcceptedCmp1)),2) AS acceptance_rate_cmp1,
+    ROUND(100*(AVG(AcceptedCmp2)),2) AS acceptance_rate_cmp2,
+    ROUND(100*(AVG(AcceptedCmp3)),2) AS acceptance_rate_cmp3,
+    ROUND(100*(AVG(AcceptedCmp4)),2) AS acceptance_rate_cmp4,
+    ROUND(100*(AVG(AcceptedCmp5)),2) AS acceptance_rate_cmp5,
+    ROUND(100*(AVG(Response)),2) AS overall_acceptance_rate
 FROM marketing_campaign;
+
+--- Campaign acceptance by Marital Status
+SELECT
+	Marital_Status,
+    ROUND(100*(AVG(AcceptedCmp1)),2) AS acceptance_rate_cmp1,
+    ROUND(100*(AVG(AcceptedCmp2)),2) AS acceptance_rate_cmp2,
+    ROUND(100*(AVG(AcceptedCmp3)),2) AS acceptance_rate_cmp3,
+    ROUND(100*(AVG(AcceptedCmp4)),2) AS acceptance_rate_cmp4,
+    ROUND(100*(AVG(AcceptedCmp5)),2) AS acceptance_rate_cmp5,
+    ROUND(100*(AVG(Response)),2) AS overall_acceptance_rate
+FROM marketing_campaign
+WHERE Marital_status IN ('Single', 'Together', 'Married', 'Divorced', 'Widow')
+GROUP BY Marital_Status;
+
+--- Campaign acceptance by Education level
+SELECT
+	Education,
+    ROUND(100*(AVG(AcceptedCmp1)),2) AS acceptance_rate_cmp1,
+    ROUND(100*(AVG(AcceptedCmp2)),2) AS acceptance_rate_cmp2,
+    ROUND(100*(AVG(AcceptedCmp3)),2) AS acceptance_rate_cmp3,
+    ROUND(100*(AVG(AcceptedCmp4)),2) AS acceptance_rate_cmp4,
+    ROUND(100*(AVG(AcceptedCmp5)),2) AS acceptance_rate_cmp5,
+    ROUND(100*(AVG(Response)),2) AS overall_acceptance_rate
+FROM marketing_campaign
+GROUP BY Education;
 
 --- Complain and response analysis
 SELECT 
